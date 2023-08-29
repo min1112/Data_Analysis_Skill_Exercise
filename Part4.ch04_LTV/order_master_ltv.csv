@@ -1,4 +1,4 @@
-﻿mem_no,part_date,order_amount
+﻿mem_no,ord_dt,order_amount
 1,2023-01-13,30580
 2,2023-01-10,31294
 3,2023-01-16,28260
