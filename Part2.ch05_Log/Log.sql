@@ -10,7 +10,7 @@ from order_master_log
 with 
 log as (
 	select distinct mem_no
-		   ,min(referrer) over (partition by mem_no order by log_stamp) as referrer
+		   ,min(referrer) over (partition by mem_no order by log_stamp) as bnr_type 
 		   ,session_id
 		   ,log_dt
 		   ,DATETIME(log_stamp) as log_stamp
@@ -18,7 +18,7 @@ log as (
 )
 ,ord as (
 	select distinct a.mem_no
-		   ,referrer
+		   ,bnr_type
 		   ,log_stamp
 		   ,DATETIME(ord_stamp) as ord_stamp
 		   ,count(DISTINCT ord_no) as ord_cnt
@@ -31,11 +31,11 @@ log as (
 )
 ,ord2 as (
 	select distinct mem_no
-		   ,referrer
+		   ,bnr_type
 		   ,case when ord_cnt >= 1 then 1 else 0 end as is_ord
 	from ord
 )
-	select referrer
+	select bnr_type
 		   ,sum(is_ord) as ord_cnt
 	from ord2
 	group by 1
