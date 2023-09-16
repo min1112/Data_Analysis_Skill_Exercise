@@ -1,8 +1,5 @@
-select *
-from first_ord_table_practice1 
-	
+
 --코호트 분석	
---하루 2건이상 주문 제외 	
 	
 with
 fst as (
@@ -18,7 +15,8 @@ fst as (
 		   ,ord_dt
 		   ,sum(case when first_ord_dt < ord_dt and DATE(ord_dt) <= DATE(first_ord_dt, '+7 days') then 1 else 0 end) over (partition by a.mem_no) as is_w1_ord
 		   --첫주문 이후 1주일 이내 오더인지 판별
-		   ,dense_rank() over (partition by a.mem_no order by ord_dt) as ord_seq -- dense_rank 는 같은 순위는 같은 값으로 처리
+		   ,dense_rank() over (partition by a.mem_no order by ord_dt) as ord_seq 
+		   	-- dense_rank 는 동일한 값이면 중복순위를 부여
 	from order_master_practive1 a
 	inner join fst b on a.mem_no = b.mem_no
 	where 1=1
