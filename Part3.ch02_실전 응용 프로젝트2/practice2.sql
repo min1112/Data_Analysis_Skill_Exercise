@@ -45,7 +45,7 @@ log as (
 	and session_id = last_session
 )
 --연령대별로 쇼핑 리드타임 평균내기
-	select gender, avg(lead_time) as avg_leadtime
+	select fst_ord_month, avg(lead_time) as avg_leadtime
 	from summary
 	group by 1
 	order by 1
