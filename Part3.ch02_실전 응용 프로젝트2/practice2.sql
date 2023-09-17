@@ -11,7 +11,7 @@ with
 log as (
 	select a.mem_no
 		   ,SUBSTR(first_ord_dt, 1,7) as fst_ord_month
-		   ,sex
+		   ,gender
 		   ,age
 		   ,log_dt
 		   ,session_id
@@ -23,7 +23,7 @@ log as (
 ,cart as (
 	select mem_no
 		   ,fst_ord_month
-		   ,sex
+		   ,gender
 		   ,age
 		   ,session_id
 		   ,last_session
@@ -34,7 +34,7 @@ log as (
 ,summary as (
 	select distinct mem_no
 		   ,fst_ord_month
-		   ,sex
+		   ,gender
 		   ,age
 		   ,first_cartclk
 		   ,last_cartclk
@@ -44,7 +44,7 @@ log as (
 	and session_id = last_session
 )
 --연령대별로 쇼핑 리드타임 평균내기
-	select age, avg(lead_time) as avg_leadtime
+	select gender, avg(lead_time) as avg_leadtime
 	from summary
 	group by 1
 	order by 1

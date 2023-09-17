@@ -1,4 +1,4 @@
-﻿mem_no,first_ord_dt,sex,age
+﻿mem_no,first_ord_dt,gender,age
 1,2023-07-21,male,40대
 2,2023-05-06,male,20대
 3,2023-06-04,male,20대
@@ -9,3 +9,6 @@
 8,2023-08-20,female,20대
 9,2023-08-01,female,30대
 10,2023-08-30,female,30대
+,,,
+,,,
+,,,
