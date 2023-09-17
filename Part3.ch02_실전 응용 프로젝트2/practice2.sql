@@ -19,6 +19,7 @@ log as (
 		   ,last_value(session_id) over (partition by a.mem_no) as last_session
 	from log_table_practice2 a
 	inner join first_ord_table_practice2 b on a.mem_no = b.mem_no
+	where event = 'CartClk'
 )
 ,cart as (
 	select mem_no
