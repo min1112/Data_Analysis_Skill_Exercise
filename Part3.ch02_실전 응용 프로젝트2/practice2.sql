@@ -15,7 +15,7 @@ log as (
 		   ,log_dt
 		   ,session_id
 		   ,DATETIME(log_stamp) as log_stamp
-		   ,last_value(session_id) over (partition by a.mem_no) as last_session
+		   ,max(session_id) over (partition by a.mem_no) as last_session
 	from log_table_practice2 a
 	inner join first_ord_table_practice2 b on a.mem_no = b.mem_no
 	where event = 'CartClk'
