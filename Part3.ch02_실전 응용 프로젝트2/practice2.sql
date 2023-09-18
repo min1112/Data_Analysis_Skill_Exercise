@@ -10,7 +10,6 @@ from first_ord_table_practice2
 with 
 log as (
 	select a.mem_no
-		   ,SUBSTR(first_ord_dt, 1,7) as fst_ord_month
 		   ,gender
 		   ,age
 		   ,log_dt
@@ -23,7 +22,6 @@ log as (
 )
 ,cart as (
 	select mem_no
-		   ,fst_ord_month
 		   ,gender
 		   ,age
 		   ,session_id
@@ -34,18 +32,16 @@ log as (
 )
 ,summary as (
 	select distinct mem_no
-		   ,fst_ord_month
 		   ,gender
 		   ,age
 		   ,first_cartclk
 		   ,last_cartclk
 		   ,(julianday(last_cartclk)-julianday(first_cartclk)) * 24 * 60 as lead_time
 	from cart
-	where 1=1 
-	and session_id = last_session
+	where session_id = last_session
 )
 --연령대별로 쇼핑 리드타임 평균내기
-	select fst_ord_month, avg(lead_time) as avg_leadtime
+	select age, avg(lead_time) as avg_leadtime
 	from summary
 	group by 1
 	order by 1
